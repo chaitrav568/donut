@@ -1,9 +1,12 @@
 import requests
+from urllib3.exceptions import InsecureRequestWarning
 
+requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)
 inputItem = input("Enter the Name of Item : ")
-response = requests.get('https://opensource.adobe.com/Spry/data/json/donuts.js').text  # creating a response from http
+# creating a response from http
+# response = requests.get('https://opensource.adobe.com/Spry/data/json/donuts.js').text  
 # ignoring the ssl certification
-# response = requests.get('https://opensource.adobe.com/Spry/data/json/donuts.js', verify=False).text
+response = requests.get('https://opensource.adobe.com/Spry/data/json/donuts.js', verify=False).text
 apiText = eval(response)  # converting string (.txt) to dictionary
 items = (apiText.get('items'))  # apiText["items"]
 item = (items.get('item'))  # items["item"]
